@@ -99,8 +99,19 @@ public class HexSelectorView extends LinearLayout {
 		if(color == this.color)
 			return;
 		this.color = color;
-		edit.setText(Integer.toHexString(color).toUpperCase());
+		edit.setText(padLeft(Integer.toHexString(color).toUpperCase(), '0', 8));
 		txtError.setVisibility(GONE);
+	}
+	
+	private String padLeft(String string, char padChar, int size)
+	{
+		if(string.length() >= size)
+			return string;
+		StringBuilder result = new StringBuilder();
+		for(int i=string.length(); i<size; i++)
+			result.append(padChar);
+		result.append(string);
+		return result.toString();
 	}
 	
 	private void onColorChanged()
